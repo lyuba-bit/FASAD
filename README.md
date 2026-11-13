@@ -1,1 +1,331 @@
-# FASAD
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Фасадная бригада — мокрый фасад с гарантией 5 лет | Чайковский</title>
+<style>
+  :root{
+    --primary:#1f4e79;
+    --accent:#e67e22;
+    --light:#f5f7fa;
+    --dark:#22313f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',Arial,sans-serif;color:var(--dark);line-height:1.6;}
+  .container{max-width:1100px;margin:0 auto;padding:0 20px;}
+
+  /* Шапка */
+  header{background:var(--primary);color:#fff;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.15);}
+  header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  .brand{display:flex;align-items:center;gap:16px;text-decoration:none;color:#fff;}
+
+  /* ЛОГОТИП — КВАДРАТ (размер не меняем) */
+  .brand .logo-square{
+    width:80px;height:80px;border-radius:14px;overflow:hidden;
+    box-shadow:0 6px 20px rgba(0,0,0,.4);
+    border:3px solid rgba(255,255,255,.7);
+    flex-shrink:0;
+    background:#fff;
+    display:flex;align-items:center;justify-content:center;
+  }
+  /* Фото внутри вписывается целиком, без обрезки */
+  .brand .logo-square img{
+    width:100%;height:100%;object-fit:contain;display:block;
+  }
+
+  .logo{font-size:26px;font-weight:800;letter-spacing:.4px;line-height:1.15;}
+  .logo span{color:var(--accent);}
+  .logo small{display:block;font-size:12px;font-weight:400;opacity:.85;letter-spacing:.3px;margin-top:2px;}
+  .phone{font-size:18px;font-weight:600;text-align:right;}
+  .phone small{display:block;font-size:12px;font-weight:400;opacity:.8;}
+
+  /* ГЕРОЙ — ФОН: ФОТО БРИГАДЫ */
+  .hero{
+    background:
+      linear-gradient(rgba(31,78,121,.7), rgba(31,78,121,.7)),
+      url('fasad-photo.jpg') center/cover no-repeat;
+    color:#fff;
+    padding:80px 0 90px;
+    text-align:center;
+    position:relative;
+  }
+  
+  /* ЛОГОТИП В ГЕРОЕ — БОЛЬШОЙ КВАДРАТ (размер не меняем) */
+  .hero-logo{
+    width:200px;height:200px;border-radius:26px;overflow:hidden;
+    margin:0 auto 26px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 44px rgba(0,0,0,.5);
+    border:4px solid rgba(255,255,255,.8);
+    background:#fff;
+  }
+  /* Фото внутри вписывается целиком */
+  .hero-logo img{
+    width:100%;height:100%;object-fit:contain;display:block;
+  }
+
+  .hero h1{font-size:40px;margin-bottom:16px;line-height:1.2;}
+  .hero p{font-size:19px;margin:0 auto 30px;max-width:680px;opacity:.95;}
+  .btn{display:inline-block;background:var(--accent);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:17px;border:none;cursor:pointer;transition:.2s;}
+  .btn:hover{background:#cf6d14;transform:translateY(-2px);}
+  .btn-outline{background:transparent;border:2px solid #fff;margin-left:12px;}
+
+  /* ПРЕИМУЩЕСТВА — ФОН: ФОТО СОВРЕМЕННОГО ФАСАДА */
+  .features{
+    padding:80px 0;
+    background:
+      linear-gradient(rgba(34,49,63,.85), rgba(34,49,63,.85)),
+      url('https://perestroydom.ru/wp-content/uploads/2025/11/41_sovremennye-fasadnye-paneli-1.webp') center/cover no-repeat;
+    color:#fff;
+    position:relative;
+  }
+  .features h2{text-align:center;font-size:30px;margin-bottom:40px;color:#fff;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
+  
+  /* Карточки преимуществ — полупрозрачные */
+  .card{
+    background:rgba(255,255,255,.1);
+    backdrop-filter:blur(6px);
+    padding:28px;
+    border-radius:12px;
+    box-shadow:0 4px 16px rgba(0,0,0,.2);
+    border:1px solid rgba(255,255,255,.15);
+  }
+  .card .icon{font-size:36px;margin-bottom:12px;}
+  .card h3{font-size:19px;margin-bottom:8px;color:var(--accent);}
+  .card p{font-size:15px;color:#e0e0e0;}
+
+  /* Калькулятор */
+  .calc{padding:60px 0;background:var(--light);}
+  .calc h2{text-align:center;font-size:30px;margin-bottom:12px;}
+  .calc .sub{text-align:center;color:#666;margin-bottom:36px;}
+  .calc-box{max-width:560px;margin:0 auto;background:#fff;border:1px solid #e0e6ed;border-radius:16px;padding:32px;box-shadow:0 8px 30px rgba(0,0,0,.07);}
+  .calc-box label{display:block;font-weight:600;margin-bottom:6px;margin-top:18px;font-size:15px;}
+  .calc-box label:first-child{margin-top:0;}
+  .calc-box input,.calc-box select{width:100%;padding:12px 14px;border:1px solid #ccd5df;border-radius:8px;font-size:16px;font-family:inherit;}
+  .calc-box input:focus,.calc-box select:focus{outline:none;border-color:var(--primary);}
+  .result{margin-top:24px;padding:20px;background:var(--light);border-radius:10px;text-align:center;}
+  .result .sum{font-size:32px;font-weight:700;color:var(--primary);}
+  .result small{display:block;color:#777;margin-top:4px;font-size:13px;}
+
+  /* Портфолио */
+  .portfolio{padding:60px 0;background:var(--light);}
+  .portfolio h2{text-align:center;font-size:30px;margin-bottom:40px;}
+  .works{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+  .work{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06);}
+  .work .img{height:180px;background:linear-gradient(135deg,#9bb7d4,#6c8ebf);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:15px;}
+  .work .info{padding:18px;}
+  .work .info h3{font-size:17px;margin-bottom:4px;}
+  .work .info p{font-size:14px;color:#666;}
+
+  /* ЗАЯВКА — ФОН: ТО ЖЕ ФОТО БРИГАДЫ */
+  .order{
+    padding:70px 0;
+    background:
+      linear-gradient(rgba(34,49,63,.8), rgba(34,49,63,.8)),
+      url('fasad-photo.jpg') center/cover no-repeat;
+    color:#fff;
+  }
+  .order h2{text-align:center;font-size:30px;margin-bottom:12px;}
+  .order .sub{text-align:center;opacity:.85;margin-bottom:36px;}
+  .order-box{max-width:520px;margin:0 auto;}
+  .order-box input{width:100%;padding:14px 16px;border:none;border-radius:8px;font-size:16px;margin-bottom:14px;font-family:inherit;}
+  .order-box .btn{width:100%;padding:16px;}
+  .order-box small{display:block;text-align:center;margin-top:14px;font-size:12px;opacity:.7;}
+
+  /* Футер */
+  footer{background:var(--dark);color:#aab6c2;padding:34px 0;text-align:center;font-size:14px;}
+  footer strong{color:#fff;}
+  .footer-brand{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:16px;}
+  
+  /* ЛОГОТИП В ФУТЕРЕ — КВАДРАТ (размер не меняем) */
+  .footer-brand .logo-square{
+    width:60px;height:60px;border-radius:10px;overflow:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,.45);
+    flex-shrink:0;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+  }
+  /* Фото внутри вписывается целиком */
+  .footer-brand .logo-square img{
+    width:100%;height:100%;object-fit:contain;display:block;
+  }
+  
+  .footer-brand span{font-size:20px;font-weight:700;color:#fff;}
+
+  @media(max-width:700px){
+    .hero h1{font-size:28px;}
+    .hero-logo{width:160px;height:160px;}
+    .brand .logo-square{width:64px;height:64px;}
+    .logo{font-size:20px;}
+    .btn-outline{margin-left:0;margin-top:12px;}
+    .phone{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header>
+  <div class="container">
+    <a class="brand" href="#">
+      <div class="logo-square">
+        <img src="https://sun9-52.vkuserphoto.ru/s/v1/ig2/s7CgsK5QvRxDa3OhG5ztHi7ZsXHlrpjPoG-g3yUCIAMexVc08GzINlebKbeHc9JYt6Md6eEGTx6dDIr4uFvuTJIA.jpg?quality=95&as=32x20,48x30,72x46,108x68,160x101,240x152,360x228,480x304,540x342,640x406,720x457,1080x685&from=bu&u=V3Xh_G5AQIWXecfuSygNE9oRpd5AlHpZYylw7TVj-sg&cs=1080x0" alt="Логотип Фасадная бригада">
+      </div>
+      <div class="logo">Фасадная<span> бригада</span><small>мокрый фасад · Чайковский</small></div>
+    </a>
+    <div class="phone">+7 (342) 000-00-00<small>Бесплатный замер по Чайковскому</small></div>
+  </div>
+</header>
+
+<!-- ГЕРОЙ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-logo">
+      <img src="https://sun9-52.vkuserphoto.ru/s/v1/ig2/s7CgsK5QvRxDa3OhG5ztHi7ZsXHlrpjPoG-g3yUCIAMexVc08GzINlebKbeHc9JYt6Md6eEGTx6dDIr4uFvuTJIA.jpg?quality=95&as=32x20,48x30,72x46,108x68,160x101,240x152,360x228,480x304,540x342,640x406,720x457,1080x685&from=bu&u=V3Xh_G5AQIWXecfuSygNE9oRpd5AlHpZYylw7TVj-sg&cs=1080x0" alt="Фасадная бригада">
+    </div>
+    <h1>Мокрый фасад с гарантией 5 лет —<br>рассчитайте цену за 2 минуты</h1>
+    <p>Утепление и отделка фасада по фиксированной смете. Работаем по договору, используем только негорючие материалы. г. Чайковский и район.</p>
+    <a href="#calc" class="btn">Рассчитать стоимость</a>
+    <a href="#order" class="btn btn-outline">Бесплатный замер</a>
+  </div>
+</section>
+
+<!-- ПРЕИМУЩЕСТВА (ФОН - ВАШЕ ФОТО) -->
+<section class="features">
+  <div class="container">
+    <h2>Почему выбирают нас</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <h3>Гарантия 5 лет</h3>
+        <p>Максимальная гарантия по ст. 756 ГК РФ. Прописана в договоре, а не «на словах».</p>
+      </div>
+      <div class="card">
+        <div class="icon">💰</div>
+        <h3>Фиксированная смета</h3>
+        <p>Цена на сайте = цена в договоре (ст. 709 ГК РФ). Никаких скрытых доплат.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔥</div>
+        <h3>Негорючие материалы</h3>
+        <p>Минеральная вата НГ по СП 522.1325800.2023 — безопасно для деревянных домов.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📐</div>
+        <h3>Онлайн-калькулятор</h3>
+        <p>Считайте стоимость фасада прямо на сайте — до звонка и выезда замерщика.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР -->
+<section class="calc" id="calc">
+  <div class="container">
+    <h2>Калькулятор стоимости фасада</h2>
+    <p class="sub">Укажите параметры — увидите ориентировочную цену «под ключ» (работа + материал)</p>
+    <div class="calc-box">
+      <label for="area">Площадь фасада, м²</label>
+      <input type="number" id="area" value="150" min="10" max="2000" oninput="calculate()">
+
+      <label for="insulation">Тип утепления</label>
+      <select id="insulation" onchange="calculate()">
+        <option value="0">Без утепления (только отделка)</option>
+        <option value="600" selected>Минеральная вата 100 мм (стандарт)</option>
+        <option value="900">Минеральная вата 150 мм (тёплый вариант)</option>
+      </select>
+
+      <label for="finish">Тип отделки</label>
+      <select id="finish" onchange="calculate()">
+        <option value="1200">Декоративная штукатурка «короед»</option>
+        <option value="1500">Фактурная штукатурка + окраска</option>
+        <option value="1800">Венецианская штукатурка (премиум)</option>
+      </select>
+
+      <div class="result">
+        <div class="sum" id="total">— ₽</div>
+        <small>Ориентировочная стоимость «под ключ». Точная смета — после бесплатного замера.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПОРТФОЛИО -->
+<section class="portfolio">
+  <div class="container">
+    <h2>Наши работы</h2>
+    <div class="works">
+      <div class="work">
+        <div class="img">Дом 140 м² · минвата 100 мм</div>
+        <div class="info"><h3>Коттедж, Чайковский</h3><p>Мокрый фасад «короед», срок 12 дней. Гарантия 5 лет.</p></div>
+      </div>
+      <div class="work">
+        <div class="img">Дом 180 м² · минвата 150 мм</div>
+        <div class="info"><h3>Дом в Завьялово</h3><p>Утепление + фактурная штукатурка, срок 16 дней.</p></div>
+      </div>
+      <div class="work">
+        <div class="img">Кафе 90 м² · минвата 100 мм</div>
+        <div class="info"><h3>Коммерческий объект</h3><p>Фасад под сдачу, негорючие материалы НГ.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ЗАЯВКА -->
+<section class="order" id="order">
+  <div class="container">
+    <h2>Записаться на бесплатный замер</h2>
+    <p class="sub">Выезд замерщика и точная смета — бесплатно. Перезвоним в течение 15 минут.</p>
+    <div class="order-box">
+      <input type="text" id="name" placeholder="Ваше имя">
+      <input type="tel" id="phone" placeholder="Телефон +7 (___) ___-__-__">
+      <button class="btn" onclick="sendOrder()">Отправить заявку</button>
+      <small>Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">
+      <div class="logo-square">
+        <img src="https://sun9-52.vkuserphoto.ru/s/v1/ig2/s7CgsK5QvRxDa3OhG5ztHi7ZsXHlrpjPoG-g3yUCIAMexVc08GzINlebKbeHc9JYt6Md6eEGTx6dDIr4uFvuTJIA.jpg?quality=95&as=32x20,48x30,72x46,108x68,160x101,240x152,360x228,480x304,540x342,640x406,720x457,1080x685&from=bu&u=V3Xh_G5AQIWXecfuSygNE9oRpd5AlHpZYylw7TVj-sg&cs=1080x0" alt="Фасадная бригада">
+      </div>
+      <span>Фасадная бригада</span>
+    </div>
+    <p>ИП «Фасадная бригада» · г. Чайковский, Пермский край</p>
+    <p>+7 (342) 000-00-00 · info@fasadv-chaykovsky.ru</p>
+    <p style="margin-top:10px;opacity:.6;">© 2026. Бизнес-план разработан в рамках итоговой работы ГБПОУ «ЧТПТиУ».</p>
+  </div>
+</footer>
+
+<script>
+// Калькулятор
+function calculate(){
+  const area = parseFloat(document.getElementById('area').value) || 0;
+  const insulation = parseFloat(document.getElementById('insulation').value);
+  const finish = parseFloat(document.getElementById('finish').value);
+  const pricePerM2 = insulation + finish;
+  const total = area * pricePerM2;
+  document.getElementById('total').textContent =
+    total.toLocaleString('ru-RU') + ' ₽';
+}
+
+// Отправка заявки (демо)
+function sendOrder(){
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  if(!name || !phone){
+    alert('Пожалуйста, заполните имя и телефон.');
+    return;
+  }
+  alert('Спасибо, ' + name + '! Заявка принята.\nМы перезвоним на номер ' + phone + ' в течение 15 минут.');
+  document.getElementById('name').value = '';
+  document.getElementById('phone').value = '';
+}
+
+calculate();
+</script>
+
+</body>
+</html>
